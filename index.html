@@ -1,48 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Kiswahili I</title>
-    <link rel="stylesheet" href="./style.css">
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
-  </head>
-  <body>
-    <main>
-      <embed src="https://sites.google.com/view/kiswahili-i/home-nyumbani/sura-ya-kwanza" width="500" height="375">
-        <h1>Kiswahili I</h1>    
-        <section id="chapter1">
-            <h2>Sura ya Kwanza: Aina za Salamu </h2>
-            <h4> Just like in English, there are a variety of ways to greet someone in Kiswahili. </h4>
-            <h4> The kind of greeting you use will depend on the ‘who’ and ‘when’ of the interaction. </h4>
-            <h4> Types of Greetings </h4>
-            <div class="column">
-                <h3> Msamiati: Mimi na Familia </h3>
-                <ul>
-                    <li>Maneno 1</li>
-                    <li>Maneno 2</li>
-                    <!-- Add more vocabulary words -->
-                </ul>
-            </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flashcard Editor</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-            <div class="column">
-                <h3>Mazungumzo</h3>
-                <p>Mazungumzo yanaendelea hapa.</p>
-            </div>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      padding: 20px;
+    }
 
-            <div class="column">
-                <h3>Mazoezi</h3>
-                <p>Mazoezi yanaendelea hapa.</p>
-            </div>
-           <div style="position: relative; width: 100%; height: 0; padding-top: 56.2225%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden; border-radius: 8px; will-change: transform;">
-        <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;" src="https://www.canva.com/design/DAFy2W8XAgw/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
-        </div>
-        <a href="https://www.canva.com/design/DAFy2W8XAgw/view?utm_content=DAFy2W8XAgw&utm_campaign=designshare&utm_medium=embeds&utm_source=link" target="_blank" rel="noopener"></a> 
-        </section>
-    </main>
-    <script src="index.js"></script>
-  </body>
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2 {
+      text-align: center;
+    }
+
+    .editor {
+      margin-bottom: 30px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .flashcards {
+      margin-top: 20px;
+    }
+
+    .flashcard {
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+
+    .flashcard .back {
+      display: none;
+    }
+
+    .flashcard .toggle {
+      cursor: pointer;
+      color: #007bff;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Flashcard Editor</h1>
+
+    <!-- Flashcard Creation Form -->
+    <div class="editor">
+      <h2>Create a New Flashcard</h2>
+      <form id="flashcardForm">
+        <label for="front">Front of Flashcard</label>
+        <textarea id="front" rows="3" required></textarea>
+
+        <label for="back">Back of Flashcard</label>
+        <textarea id="back" rows="3" required></textarea>
+
+        <button type="submit">Add Flashcard</button>
+      </form>
+    </div>
+
+    <!-- Flashcard Display Area -->
+    <div class="flashcards">
+      <h2>Your Flashcards</h2>
+      <div id="flashcardList"></div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('flashcardForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      
+      // Get the input values
+      const front = document.getElementById('front').value;
+      const back = document.getElementById('back').value;
+
+      // Create a new flashcard element
+      const flashcard = document.createElement('div');
+      flashcard.classList.add('flashcard');
+
+      flashcard.innerHTML = `
+        <div class="front">${front}</div>
+        <div class="back">${back}</div>
+        <span class="toggle">Show Answer</span>
+      `;
+
+      // Add event listener to toggle between front and back
+      flashcard.querySelector('.toggle').addEventListener('click', function () {
+        const backEl = flashcard.querySelector('.back');
+        if (backEl.style.display === 'none' || backEl.style.display === '') {
+          backEl.style.display = 'block';
+          this.textContent = 'Hide Answer';
+        } else {
+          backEl.style.display = 'none';
+          this.textContent = 'Show Answer';
+        }
+      });
+
+      // Add the flashcard to the flashcard list
+      document.getElementById('flashcardList').appendChild(flashcard);
+
+      // Clear the form
+      document.getElementById('front').value = '';
+      document.getElementById('back').value = '';
+    });
+  </script>
+</body>
 </html>
-
-
