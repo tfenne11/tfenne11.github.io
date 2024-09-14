@@ -3,150 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flashcard Editor</title>
+  <title>Flashcard Web App</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
       font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
-      padding: 20px;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
     }
-
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h1, h2 {
-      text-align: center;
-    }
-
-    .editor {
-      margin-bottom: 30px;
-    }
-
-    label {
-      font-weight: bold;
-    }
-
-    textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 1rem;
-    }
-
-    button {
-      background-color: #007bff;
-      color: white;
-      padding: 10px 20px;
+    iframe {
+      width: 80%;
+      height: 600px;
       border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #0056b3;
-    }
-
-    .flashcards {
-      margin-top: 20px;
-    }
-
-    .flashcard {
-      background-color: #f9f9f9;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      padding: 15px;
-      margin-bottom: 15px;
-    }
-
-    .flashcard .back {
-      display: none;
-    }
-
-    .flashcard .toggle {
-      cursor: pointer;
-      color: #007bff;
-      font-weight: bold;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Flashcard Editor</h1>
-
-    <!-- Flashcard Creation Form -->
-    <div class="editor">
-      <h2>Create a New Flashcard</h2>
-      <form id="flashcardForm">
-        <label for="front">Front of Flashcard</label>
-        <textarea id="front" rows="3" required></textarea>
-
-        <label for="back">Back of Flashcard</label>
-        <textarea id="back" rows="3" required></textarea>
-
-        <button type="submit">Add Flashcard</button>
-      </form>
-    </div>
-
-    <!-- Flashcard Display Area -->
-    <div class="flashcards">
-      <h2>Your Flashcards</h2>
-      <div id="flashcardList"></div>
-    </div>
-  </div>
-
-  <script>
-    document.getElementById('flashcardForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      
-      // Get the input values
-      const front = document.getElementById('front').value;
-      const back = document.getElementById('back').value;
-
-      // Create a new flashcard element
-      const flashcard = document.createElement('div');
-      flashcard.classList.add('flashcard');
-
-      flashcard.innerHTML = `
-        <div class="front">${front}</div>
-        <div class="back">${back}</div>
-        <span class="toggle">Show Answer</span>
-      `;
-
-      // Add event listener to toggle between front and back
-      flashcard.querySelector('.toggle').addEventListener('click', function () {
-        const backEl = flashcard.querySelector('.back');
-        if (backEl.style.display === 'none' || backEl.style.display === '') {
-          backEl.style.display = 'block';
-          this.textContent = 'Hide Answer';
-        } else {
-          backEl.style.display = 'none';
-          this.textContent = 'Show Answer';
-        }
-      });
-
-      // Add the flashcard to the flashcard list
-      document.getElementById('flashcardList').appendChild(flashcard);
-
-      // Clear the form
-      document.getElementById('front').value = '';
-      document.getElementById('back').value = '';
-    });
-  </script>
+  <iframe src="https://script.google.com/macros/s/AKfycbzVj3ZuNvwTTBFpu45k_EEvtTfizZdCmVbRC9vNxkNalipabHgYr-aAFbToisPWYGfNLg/exec" allowfullscreen></iframe>
 </body>
 </html>
